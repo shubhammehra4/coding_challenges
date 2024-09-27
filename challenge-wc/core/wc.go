@@ -26,6 +26,10 @@ func WordCount(options WordCountOptions) (res []*WordCountResult, err error) {
 		total.Add(f)
 	}
 
+	if len(options.filePaths) > 1 {
+		res = append(res, total)
+	}
+
 	return res, nil
 }
 

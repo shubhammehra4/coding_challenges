@@ -1,7 +1,11 @@
+//go:build unit
+
 package core
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 
 	"github.com/shubhammehra4/coding_challenges/challenge-wc/utils"
 )
@@ -52,9 +56,7 @@ func TestCountLines(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			result := countLines(tt.input)
-			if result != tt.expected {
-				t.Errorf("countLines() = %d; want %d", result, tt.expected)
-			}
+			assert.Equal(t, tt.expected, result)
 		})
 	}
 }
@@ -115,9 +117,68 @@ func TestCountWords(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			result := countWords(tt.input, true)
-			if result != tt.expected {
-				t.Errorf("countWords() = %d; want %d", result, tt.expected)
-			}
+			assert.Equal(t, tt.expected, result)
+		})
+	}
+}
+
+func TestCountCharacters(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    []byte
+		expected int
+	}{
+		{
+			name:     "Empty buffer",
+			input:    []byte{},
+			expected: 0,
+		},
+		{
+			name:     "Single ASCII character",
+			input:    []byte("a"),
+			expected: 1,
+		},
+		{
+			name:     "Multiple ASCII characters",
+			input:    []byte("abc"),
+			expected: 3,
+		},
+		{
+			name:     "Single non-ASCII character",
+			input:    []byte("ñ"),
+			expected: 1,
+		},
+		{
+			name:     "Multiple non-ASCII characters",
+			input:    []byte("ñαβγ"),
+			expected: 4,
+		},
+		{
+			name:     "Mixed ASCII and non-ASCII characters",
+			input:    []byte("añbγ"),
+			expected: 4,
+		},
+		{
+			name:     "String with spaces",
+			input:    []byte("a b c"),
+			expected: 5,
+		},
+		{
+			name:     "String with newlines",
+			input:    []byte("a\nb\nc"),
+			expected: 5,
+		},
+		{
+			name:     "String with tabs",
+			input:    []byte("a\tb\tc"),
+			expected: 5,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := countCharacters(tt.input)
+			assert.Equal(t, tt.expected, result)
 		})
 	}
 }

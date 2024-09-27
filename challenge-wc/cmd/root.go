@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/spf13/cobra"
+
 	"github.com/shubhammehra4/coding_challenges/challenge-wc/core"
 	"github.com/shubhammehra4/coding_challenges/challenge-wc/utils"
-	"github.com/spf13/cobra"
 )
 
 func NewRootCmd(ctx context.Context) *cobra.Command {
