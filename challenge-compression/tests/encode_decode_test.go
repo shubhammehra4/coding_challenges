@@ -40,7 +40,7 @@ func TestEncodeDecode(t *testing.T) {
 	assert.FileExists(t, targetDecodedFile)
 
 	// Compare the original file with the decoded file
-	assertFilesEqual(t, orginalFile, targetDecodedFile)
+	assertFilesEqual(t, testFile, targetDecodedFile)
 }
 
 func assertFilesEqual(t *testing.T, file1, file2 string) {
